@@ -8664,7 +8664,7 @@ function App(){
     // Derive WS server URL from current hostname so cross-device works.
     // WebSocket server runs as a separate Railway service.
     // Replace the URL below with your Railway WS service domain after deploying.
-    const wsUrl = window.__WS_URL__ || "https://YOUR-WS-SERVICE.up.railway.app";
+    const wsUrl = window.__WS_URL__ || "https://determined-vibrancy.up.railway.app";
     console.log("[PayTrust WS] Connecting to:", wsUrl);
 
     const socket = io(wsUrl, {
