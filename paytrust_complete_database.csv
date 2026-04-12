@@ -1,0 +1,166 @@
+TABLE: USERS
+phone_number,name,pin,balance,upi_id,age,verified,risk_score,freeze_count,permanent_frozen,blocked_attempts,bypass_attempts,is_admin
+9340228345,Chirayu Mahajan,1167,84250,chirayu@paytrust,21,TRUE,12,0,FALSE,0,0,FALSE
+9158763151,Pranav Chopade,2611,32780,pranav@paytrust,30,TRUE,8,0,FALSE,0,0,FALSE
+9766876442,Farhan Farooqui,1234,15400,farhan@paytrust,65,FALSE,25,0,FALSE,0,0,FALSE
+9876543210,Mehul Patil,9876,67120,mehul@paytrust,19,TRUE,18,0,FALSE,0,0,FALSE
+9699189866,Vedant Deshmukh,2805,51900,vedant@paytrust,28,TRUE,5,0,FALSE,0,0,FALSE
+9988776655,Rajesh Kumar,5555,125000,rajesh@paytrust,45,TRUE,3,0,FALSE,0,0,FALSE
+9123456789,Amit Sharma,1212,45000,amit@paytrust,35,TRUE,7,0,FALSE,0,0,FALSE
+8899776655,Sneha Reddy,3434,89000,sneha@paytrust,29,FALSE,2,0,FALSE,0,0,FALSE
+7778889990,Vikram Singh,5656,230000,vikram@paytrust,52,TRUE,1,0,FALSE,0,0,FALSE
+9988001122,Irfan Khan,7878,34000,irfan@paytrust,42,FALSE,4,0,FALSE,0,0,FALSE
+9663355221,Zara Sheikh,9090,67800,zara@paytrust,31,TRUE,6,0,FALSE,0,0,FALSE
+8765432109,Rohan Deshmukh,4321,28500,rohan@paytrust,26,FALSE,9,0,FALSE,0,0,FALSE
+7654321098,Kavita Sharma,1357,92300,kavita@paytrust,38,TRUE,11,0,FALSE,0,0,FALSE
+9699624733,Shivshree Shinde,2002,90000,shivshree@paytrust,19,TRUE,0,0,FALSE,0,0,FALSE
+1234567890,Admin,1234,999999,admin@paytrust,99,TRUE,0,0,FALSE,0,0,TRUE
+
+TABLE: CONTACTS
+owner_phone,owner_name,contact_phone,contact_name
+9340228345,Chirayu Mahajan,9158763151,Pranav Chopade
+9340228345,Chirayu Mahajan,9766876442,Farhan Farooqui
+9340228345,Chirayu Mahajan,9876543210,Mehul Patil
+9340228345,Chirayu Mahajan,9988776655,Rajesh Kumar
+9340228345,Chirayu Mahajan,9123456789,Amit Sharma
+9340228345,Chirayu Mahajan,9012345678,Priya Patel
+9340228345,Chirayu Mahajan,8901234567,Neha Gupta
+9158763151,Pranav Chopade,9340228345,Chirayu Mahajan
+9158763151,Pranav Chopade,9766876442,Farhan Farooqui
+9158763151,Pranav Chopade,9876543210,Mehul Patil
+9158763151,Pranav Chopade,8899776655,Sneha Reddy
+9158763151,Pranav Chopade,7778889990,Vikram Singh
+9158763151,Pranav Chopade,9988112233,Anjali Desai
+9766876442,Farhan Farooqui,9340228345,Chirayu Mahajan
+9766876442,Farhan Farooqui,9158763151,Pranav Chopade
+9766876442,Farhan Farooqui,9876543210,Mehul Patil
+9766876442,Farhan Farooqui,9988001122,Irfan Khan
+9766876442,Farhan Farooqui,9663355221,Zara Sheikh
+9766876442,Farhan Farooqui,9554433221,Imran Ali
+9876543210,Mehul Patil,9340228345,Chirayu Mahajan
+9876543210,Mehul Patil,9158763151,Pranav Chopade
+9876543210,Mehul Patil,9766876442,Farhan Farooqui
+9876543210,Mehul Patil,8765432109,Rohan Deshmukh
+9876543210,Mehul Patil,7654321098,Kavita Sharma
+9699189866,Vedant Deshmukh,9340228345,Chirayu Mahajan
+9699189866,Vedant Deshmukh,9158763151,Pranav Chopade
+9699189866,Vedant Deshmukh,9988776655,Rajesh Kumar
+9699189866,Vedant Deshmukh,9123456789,Amit Sharma
+9988776655,Rajesh Kumar,9340228345,Chirayu Mahajan
+9988776655,Rajesh Kumar,9699189866,Vedant Deshmukh
+9988776655,Rajesh Kumar,9123456789,Amit Sharma
+9123456789,Amit Sharma,9340228345,Chirayu Mahajan
+9123456789,Amit Sharma,9988776655,Rajesh Kumar
+9123456789,Amit Sharma,9699189866,Vedant Deshmukh
+8899776655,Sneha Reddy,9158763151,Pranav Chopade
+8899776655,Sneha Reddy,7778889990,Vikram Singh
+7778889990,Vikram Singh,9158763151,Pranav Chopade
+7778889990,Vikram Singh,8899776655,Sneha Reddy
+9988001122,Irfan Khan,9766876442,Farhan Farooqui
+9988001122,Irfan Khan,9663355221,Zara Sheikh
+9663355221,Zara Sheikh,9766876442,Farhan Farooqui
+9663355221,Zara Sheikh,9988001122,Irfan Khan
+8765432109,Rohan Deshmukh,9876543210,Mehul Patil
+8765432109,Rohan Deshmukh,7654321098,Kavita Sharma
+7654321098,Kavita Sharma,9876543210,Mehul Patil
+7654321098,Kavita Sharma,8765432109,Rohan Deshmukh
+
+TABLE: TRANSACTIONS
+tx_id,direction,counterparty_name,counterparty_phone,counterparty_upi,amount,date,time,risk_score,status,type,note,risk_tag,otp_used
+101,debit,Farhan Farooqui,9766876442,farhan@paytrust,9500,14 Mar 25,23:41,78,verified,debit,Rent payment,otp,TRUE
+102,debit,Mehul Patil,9876543210,mehul@paytrust,500,13 Mar 25,14:22,12,success,debit,Coffee,normal,FALSE
+103,debit,Vedant Deshmukh,9699189866,vedant@paytrust,15000,12 Mar 25,09:05,91,blocked,debit,Investment,block,FALSE
+104,credit,Pranav Chopade,9158763151,pranav@paytrust,3000,11 Mar 25,18:30,5,success,credit,Split bill,normal,FALSE
+105,debit,Unknown Merchant,9999999999,merchant@upi,2200,10 Mar 25,02:15,85,verified,debit,Online purchase,otp,TRUE
+106,credit,Mehul Patil,9876543210,mehul@paytrust,800,09 Mar 25,11:00,8,success,credit,Lunch share,normal,FALSE
+107,debit,Chirayu Mahajan,9340228345,chirayu@paytrust,1200,08 Mar 25,16:45,22,success,debit,Movie tickets,normal,FALSE
+108,debit,Rajesh Kumar,9988776655,rajesh@paytrust,2500,07 Mar 25,10:30,18,success,debit,Dinner,normal,FALSE
+109,credit,Amit Sharma,9123456789,amit@paytrust,1500,06 Mar 25,19:45,7,success,credit,Gift,normal,FALSE
+110,debit,Sneha Reddy,8899776655,sneha@paytrust,3500,05 Mar 25,13:20,45,verified,debit,Shopping,info,TRUE
+111,credit,Vikram Singh,7778889990,vikram@paytrust,5000,04 Mar 25,15:10,15,success,credit,Reimbursement,normal,FALSE
+112,debit,Irfan Khan,9988001122,irfan@paytrust,750,03 Mar 25,12:00,28,success,debit,Tea,normal,FALSE
+113,credit,Zara Sheikh,9663355221,zara@paytrust,1200,02 Mar 25,17:30,9,success,credit,Gift,normal,FALSE
+114,debit,Rohan Deshmukh,8765432109,rohan@paytrust,850,01 Mar 25,11:15,32,success,debit,Lunch,normal,FALSE
+115,credit,Kavita Sharma,7654321098,kavita@paytrust,2300,28 Feb 25,20:45,11,success,credit,Payment,normal,FALSE
+116,debit,Chirayu Mahajan,9340228345,chirayu@paytrust,4500,27 Feb 25,09:30,68,verified,debit,Bill split,info,TRUE
+117,debit,Pranav Chopade,9158763151,pranav@paytrust,1800,26 Feb 25,16:00,24,success,debit,Snacks,normal,FALSE
+
+TABLE: PAYMENT_REQUESTS
+request_id,from_name,from_phone,from_upi,amount,reason,age,risk_score,status,is_suspicious
+1,Farhan Farooqui,9766876442,farhan@paytrust,4500,Project contribution,2h ago,55,pending,FALSE
+2,Unknown Sender,9999999999,prize@lucky.upi,999,Lucky draw processing,5h ago,96,pending,TRUE
+3,Mehul Patil,9876543210,mehul@paytrust,650,Dinner split,1d ago,14,pending,FALSE
+4,Rajesh Kumar,9988776655,rajesh@paytrust,12000,Emergency loan,30m ago,82,pending,TRUE
+5,Sneha Reddy,8899776655,sneha@paytrust,350,Coffee,45m ago,8,pending,FALSE
+6,Vikram Singh,7778889990,vikram@paytrust,5000,Business payment,3h ago,38,pending,FALSE
+7,Unknown Sender,9111111111,refund@claim.upi,15000,Tax refund processing,1h ago,94,pending,TRUE
+999,Unknown Sender,9111111111,fraud@upi,15000,Refund processing fee,10m ago,95,pending,TRUE
+
+TABLE: FRAUD_KEYWORDS
+keyword,score,tier,description
+kyc,50,critical,KYC update fraud
+otp,48,critical,OTP phishing
+helpdesk,46,critical,Fake helpdesk
+aadhar,46,critical,Aadhaar phishing
+aadhaar,46,critical,Aadhaar phishing
+blocked,44,critical,Account freeze scam
+freeze,44,critical,Account freeze scam
+anydesk,50,critical,Remote access tool scam
+teamviewer,50,critical,Remote access tool scam
+quicksupport,50,critical,Remote access tool scam
+pigbutchering,50,critical,Pig butchering investment scam
+ponzi,50,critical,Ponzi scheme
+refund,40,high,Refund scam
+claim,38,high,Fake claim
+verify,38,high,Fake verification
+winner,40,high,Lottery/prize scam
+prize,40,high,Lottery/prize scam
+lottery,40,high,Lottery fraud
+bank,34,high,Bank impersonation
+fraud,36,high,Fraud department impersonation
+urgent,36,high,Urgency tactic
+arrest,38,high,Fake arrest threat
+cbi,38,high,Fake CBI officer scam
+cashback,28,medium,Fake cashback
+reward,26,medium,Fake reward
+crypto,24,medium,Crypto investment scam
+bitcoin,26,medium,Crypto scam
+trading,22,medium,Fake trading scheme
+job,18,medium,Fake job offer
+subsidy,22,medium,Fake subsidy
+official,10,low,Fake official
+service,6,low,Fake service
+care,5,low,Fake customer care
+rbi,8,low,RBI impersonation
+tax,8,low,Tax fraud
+itr,8,low,ITR refund scam
+
+TABLE: RISK_THRESHOLDS
+threshold_name,value,action,description
+RISK_NORMAL,60,allow,Transaction allowed normally
+RISK_INFO,61,warn,Show info/warning to user
+RISK_OTP,85,otp,Require OTP verification
+RISK_BLOCK,95,block,Block transaction automatically
+
+TABLE: GEO_CITIES
+city_label,latitude,longitude,state
+Pune Maharashtra,18.5204,73.8567,Maharashtra
+Alandi Maharashtra,18.6744,73.9072,Maharashtra
+Nashik Maharashtra,20.0059,73.7797,Maharashtra
+Mumbai Maharashtra,19.0760,72.8777,Maharashtra
+Delhi,28.6139,77.2090,Delhi
+Bangalore Karnataka,12.9716,77.5946,Karnataka
+Hyderabad Telangana,17.3850,78.4867,Telangana
+Chennai Tamil Nadu,13.0827,80.2707,Tamil Nadu
+Kolkata West Bengal,22.5726,88.3639,West Bengal
+Jaipur Rajasthan,26.9124,75.7873,Rajasthan
+
+TABLE: TRAVEL_THRESHOLDS
+threshold_name,speed_kmh,action,anomaly_score_added,description
+CITY_HOP,0,popup,0,Distance > 30km triggers popup
+REGION_HOP,0,popup,0,Distance > 50km triggers popup
+STATE_HOP,0,popup,0,Distance > 300km triggers popup
+SUSPICIOUS,150,popup,0,Speed > 150 km/h
+FAST,300,popup,0,Speed > 300 km/h - subsonic aircraft
+VERY_FAST,500,popup,0,Speed > 500 km/h - jet speed
+IMPOSSIBLE,800,popup,0,Speed > 800 km/h - physically impossible
