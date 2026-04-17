@@ -8,23 +8,24 @@
 <link rel="shortcut icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:#eef4ff;overflow-x:hidden;}
+body{font-family:'Inter',sans-serif;background:#f1f5f9;overflow-x:hidden;}
 :root{
-  --blue:#0078FF;
-  --blue2:#0055cc;
-  --blue3:#003fa6;
-  --bl:#e8f1ff;
-  --bll:#f0f6ff;
+  --blue:#1A56DB;
+  --blue2:#1447b0;
+  --blue3:#0e3688;
+  --bl:#dbeafe;
+  --bll:#eff6ff;
   --err:#dc2626;
-  --text:#0f172a;
-  --muted:#64748b;
-  --border:#e2e8f0;
-  --safe:#22c55e;
-  --caution:#f59e0b;
-  --warning:#f97316;
-  --blocked:#ef4444;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --safe:#16a34a;
+  --caution:#d97706;
+  --warning:#ea580c;
+  --blocked:#dc2626;
 }
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-thumb{background:rgba(0,120,255,.2);border-radius:4px;}
@@ -56,8 +57,8 @@ body{font-family:'DM Sans',sans-serif;background:#eef4ff;overflow-x:hidden;}
 .svc-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
   padding:16px 8px;background:#fff;border-radius:18px;cursor:pointer;border:1.5px solid transparent;
   transition:all .22s cubic-bezier(.4,0,.2,1);box-shadow:0 2px 10px rgba(0,80,200,.06);}
-.svc-card:hover{transform:translateY(-4px) scale(1.04);border-color:#dbeafe;
-  box-shadow:0 12px 32px rgba(0,120,255,.16);background:linear-gradient(135deg,#f0f6ff,#fff);}
+.svc-card:hover{transform:translateY(-2px);border-color:#bfdbfe;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);background:#f8faff;}
 .svc-card:active{transform:translateY(-1px) scale(.98);}
 
 /* ===== NEW: Toast ===== */
@@ -80,23 +81,22 @@ body{font-family:'DM Sans',sans-serif;background:#eef4ff;overflow-x:hidden;}
 /* ═══ PAGE TRANSITION ═══ */
 .page-enter{animation:fadeUp .32s cubic-bezier(.16,1,.3,1) both;}
 
-/* ═══ GLASS CARD ═══ */
-.glass{background:rgba(255,255,255,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,.75);box-shadow:0 4px 28px rgba(0,80,200,.07),0 1px 4px rgba(0,0,0,.04);}
+/* ═══ FLAT CARD ═══ */
+.glass{background:#ffffff;border:1px solid #e5e7eb;box-shadow:none;}
 
 /* ═══ NAV ITEM HOVER ═══ */
-.nav-item{transition:all .18s cubic-bezier(.4,0,.2,1);}
-.nav-item:hover{background:rgba(0,120,255,.07)!important;color:var(--blue)!important;transform:translateX(2px);}
+.nav-item{transition:all .18s ease;}
+.nav-item:hover{background:rgba(26,86,219,.06)!important;color:var(--blue)!important;}
 .nav-item.active{animation:navSlide .25s ease;}
 
 /* ═══ BTN HOVER ═══ */
 .btn-primary{transition:all .18s ease;}
-.btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,120,255,.38)!important;}
+.btn-primary:hover:not(:disabled){box-shadow:0 4px 12px rgba(26,86,219,.28)!important;}
 .btn-primary:active:not(:disabled){transform:translateY(0);}
 
 /* ═══ CARD HOVER ═══ */
-.hover-lift{transition:transform .2s ease,box-shadow .2s ease;}
-.hover-lift:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,80,200,.12)!important;}
+.hover-lift{transition:box-shadow .2s ease;}
+.hover-lift:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)!important;}
 
 /* ═══ CHAT QUICK REPLY BUTTONS ═══ */
 .quick-reply-btn{
@@ -175,8 +175,8 @@ function Modal({children}){
 }
 
 const API=""; // FastAPI serves index.html — use relative paths
-const B="#0078FF",B2="#0055cc",B3="#003fa6";
-const BL="#e8f1ff",BLL="#f0f6ff";
+const B="#1A56DB",B2="#1447b0",B3="#0e3688";
+const BL="#dbeafe",BLL="#eff6ff";
 const ERR="#dc2626";
 
 /* ═══ RISK THRESHOLDS ═══ */
@@ -2380,14 +2380,11 @@ function riskMeta(s){
 /* ═══ SHARED UI ═══ */
 function Avatar({name,size=40}){
   const ini=(name||"?").split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
-  const g=["linear-gradient(135deg,#0078FF,#0055cc)","linear-gradient(135deg,#3b82f6,#1d4ed8)",
-           "linear-gradient(135deg,#6366f1,#4338ca)","linear-gradient(135deg,#0ea5e9,#0284c7)",
-           "linear-gradient(135deg,#22d3ee,#0891b2)"];
+  const g=["#1A56DB","#3b82f6","#6366f1","#0ea5e9","#0891b2"];
   return(
     <div style={{width:size,height:size,borderRadius:"50%",background:g[(name||"A").charCodeAt(0)%g.length],
       display:"flex",alignItems:"center",justifyContent:"center",
-      fontSize:size*.36,fontWeight:700,color:"#fff",flexShrink:0,
-      boxShadow:"0 2px 8px rgba(0,120,255,.2)"}}>
+      fontSize:size*.36,fontWeight:700,color:"#fff",flexShrink:0}}>
       {ini}
     </div>
   );
@@ -2446,10 +2443,10 @@ const Ic={
 /* ═══ BTN ═══ */
 function Btn({children,onClick,variant="primary",disabled,style={},fullWidth}){
   const vars={
-    primary:{background:disabled?"#93c5fd":`linear-gradient(135deg,${B},${B2})`,color:"#fff",
-      boxShadow:disabled?"none":"0 4px 16px rgba(0,120,255,.28)"},
+    primary:{background:disabled?"#93c5fd":"#1A56DB",color:"#fff",
+      boxShadow:disabled?"none":"none"},
     secondary:{background:BL,color:B,border:"none"},
-    ghost:{background:"transparent",color:"#64748b",border:"1px solid #e2e8f0"},
+    ghost:{background:"transparent",color:"#6b7280",border:"1px solid #e5e7eb"},
     danger:{background:"#fef2f2",color:"#dc2626",border:"1px solid #fecaca"},
   };
   return(
@@ -3906,10 +3903,6 @@ function Sidebar({page,setPage,user,onLogout,pendingCount}){
     {id:"request-money", label:"Request Money",icon:Ic.rupee},
     {id:"requests",      label:"Pay Requests", icon:Ic.bell, badge:pendingCount},
     {id:"history",       label:"History",      icon:Ic.clock},
-    {id:"finance",       label:"Finance",      icon:Ic.rupee},
-    {id:"insights",      label:"Insights",     icon:Ic.bar},
-    {id:"smartguard",    label:"Learn & Play",  icon:(c)=><svg width="18"height="18"viewBox="0 0 24 24"fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>},
-    {id:"redeem",        label:"Redeem",       icon:(c)=><svg width="18"height="18"viewBox="0 0 24 24"fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>},
     {id:"profile",       label:"Profile",      icon:Ic.user},
   ];
   
@@ -3917,9 +3910,9 @@ function Sidebar({page,setPage,user,onLogout,pendingCount}){
   
   return(
     <div id="sidebar" style={{width:230,flexShrink:0,background:"#ffffff",
-      borderRight:"1px solid rgba(0,80,200,.07)",display:"flex",flexDirection:"column",
-      height:"100vh",position:"sticky",top:0,fontFamily:"'DM Sans',sans-serif",
-      boxShadow:"2px 0 24px rgba(0,80,200,.05)"}}>
+      borderRight:"1px solid #e5e7eb",display:"flex",flexDirection:"column",
+      height:"100vh",position:"sticky",top:0,fontFamily:"'Inter',sans-serif",
+      boxShadow:"none"}}>
 
       <div style={{padding:"20px 18px 14px",borderBottom:"1px solid #f0f6ff"}}>
         <div style={{display:"flex",alignItems:"center",gap:12}}>
@@ -3953,16 +3946,16 @@ function Sidebar({page,setPage,user,onLogout,pendingCount}){
               style={{width:"100%",display:"flex",alignItems:"center",gap:10,
                 padding:"10px 13px",borderRadius:12,border:"none",cursor:"pointer",
                 marginBottom:3,textAlign:"left",fontFamily:"'DM Sans',sans-serif",
-                background:a?"linear-gradient(135deg,#dbeafe,#eff6ff)":"transparent",
-                color:a?"#0078FF":"#64748b",
-                boxShadow:a?"0 2px 10px rgba(0,120,255,.12)":"none",
+                background:a?"#eff6ff":"transparent",
+                color:a?"#1A56DB":"#6b7280",
+                boxShadow:"none",
                 position:"relative",overflow:"hidden"}}>
               {a&&<div style={{position:"absolute",left:0,top:"20%",bottom:"20%",width:3,
-                borderRadius:"0 3px 3px 0",background:"#0078FF"}}/>}
+                borderRadius:"0 3px 3px 0",background:"#1A56DB"}}/>}
               <span style={{display:"flex",alignItems:"center",justifyContent:"center",
                 width:32,height:32,borderRadius:9,
-                background:a?"rgba(0,120,255,.12)":"transparent"}}>
-                {n.icon(a?"#0078FF":"#94a3b8")}
+                background:a?"rgba(26,86,219,.1)":"transparent"}}>
+                {n.icon(a?"#1A56DB":"#9ca3af")}
               </span>
               <span style={{fontSize:14,fontWeight:a?700:500,flex:1}}>{n.label}</span>
               {n.badge>0&&(
@@ -4016,8 +4009,6 @@ function BottomNav({page,setPage,pendingCount}){
     {id:"send",       label:"Send",    icon:Ic.send},
     {id:"request-money", label:"Request", icon:Ic.rupee, badge:0},
     {id:"requests",   label:"Pay Req", icon:Ic.bell, badge:pendingCount},
-    {id:"smartguard", label:"Guard",   icon:(c)=><svg width="18"height="18"viewBox="0 0 24 24"fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>},
-    {id:"redeem",     label:"Redeem",  icon:(c)=><svg width="18"height="18"viewBox="0 0 24 24"fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>},
     {id:"profile",    label:"Profile", icon:Ic.user},
   ];
   return(
@@ -4032,12 +4023,12 @@ function BottomNav({page,setPage,pendingCount}){
             <button key={n.id} onClick={()=>setPage(n.id)}
               style={{display:"flex",flexDirection:"column",alignItems:"center",gap:3,
                 padding:"5px 10px",background:"none",border:"none",cursor:"pointer",
-                fontFamily:"'DM Sans',sans-serif",color:a?"#0078FF":"#94a3b8",flex:1,
+                fontFamily:"'Inter',sans-serif",color:a?"#1A56DB":"#9ca3af",flex:1,
                 position:"relative"}}>
               <span style={{display:"flex",alignItems:"center",justifyContent:"center",
                 width:34,height:34,borderRadius:10,
-                background:a?"linear-gradient(135deg,#dbeafe,#eff6ff)":"transparent"}}>
-                {n.icon(a?"#0078FF":"#94a3b8")}
+                background:a?"#dbeafe":"transparent"}}>
+                {n.icon(a?"#1A56DB":"#9ca3af")}
               </span>
               <span style={{fontSize:10,fontWeight:a?800:500}}>{n.label}</span>
               {n.badge>0&&(
@@ -4082,7 +4073,7 @@ function Dashboard({user,balance,txs,setPage,updateUser}){
   }
 
   return(
-    <div className="page-pad page-enter" style={{padding:24,maxWidth:940,margin:"0 auto"}}>
+    <div className="page-pad page-enter" style={{padding:"24px 24px 32px",maxWidth:1280,margin:"0 auto"}}>
       {showPinModal&&(
         <PINModal
           userPin={user.pin}
@@ -4102,153 +4093,88 @@ function Dashboard({user,balance,txs,setPage,updateUser}){
       )}
 
       {cooldown.cooldown && (
-        <div style={{marginBottom:20,padding:"12px 18px",background:"#fff7ed",
-          border:"1px solid #fdba74",borderRadius:14,display:"flex",alignItems:"center",gap:10}}>
-          {Ic.warn("#f97316")}
-          <span style={{color:"#9a3412",fontSize:14}}>
+        <div style={{marginBottom:16,padding:"12px 16px",background:"#fff7ed",
+          border:"1px solid #fed7aa",borderRadius:10,display:"flex",alignItems:"center",gap:10}}>
+          {Ic.warn("#ea580c")}
+          <span style={{color:"#9a3412",fontSize:14,lineHeight:1.5}}>
             Cooldown active. Please wait {Math.floor(cooldown.remaining/60)}m {cooldown.remaining%60}s.
           </span>
         </div>
       )}
 
-      {blocked>0&&(
-        <div style={{display:"flex",alignItems:"center",gap:10,padding:"12px 18px",
-          background:"linear-gradient(135deg,#fef2f2,#fff5f5)",border:"1px solid #fca5a5",
-          borderRadius:14,marginBottom:20,animation:"slideDown .4s ease"}}>
-          {Ic.warn()}
-          <div style={{flex:1,fontSize:14,color:"#374151"}}>
-            <b style={{color:"#dc2626"}}>Fraud Alert:</b> {blocked} blocked transaction{blocked>1?"s":""} detected.
+      {/* ── Balance Card ── */}
+      <div style={{background:"#1A56DB",borderRadius:16,padding:"24px",marginBottom:16,display:"flex",
+        justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:16}}>
+        <div>
+          <div style={{color:"rgba(255,255,255,.7)",fontSize:12,fontWeight:500,marginBottom:10,
+            display:"flex",alignItems:"center",gap:5}}>
+            <svg width="11"height="11"viewBox="0 0 24 24"fill="none"stroke="rgba(255,255,255,.7)"strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12"cy="7"r="4"/></svg>
+            {user.upi}
           </div>
-          <button onClick={()=>setPage("insights")}
-            style={{padding:"5px 14px",background:"#fff",border:"1px solid #fca5a5",borderRadius:8,
-              color:"#dc2626",cursor:"pointer",fontSize:12,fontWeight:700,fontFamily:"'DM Sans',sans-serif"}}>
-            View →
-          </button>
+          <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:6}}>
+            <div className="balance-amt" style={{color:"#fff",fontSize:36,fontWeight:800,letterSpacing:"-1px",lineHeight:1}}>
+              {vis?`₹${balance.toLocaleString("en-IN")}`:"₹ ●●●●●●"}
+            </div>
+            <button onClick={handleEyeClick}
+              style={{background:"rgba(255,255,255,.15)",border:"1px solid rgba(255,255,255,.2)",borderRadius:8,
+                padding:"6px 8px",cursor:"pointer",display:"flex",alignItems:"center"}}>
+              {vis?Ic.eyeOff("#fff"):Ic.eye("#fff")}
+            </button>
+          </div>
+          <div style={{color:"rgba(255,255,255,.65)",fontSize:13,fontWeight:500}}>Available Balance</div>
         </div>
-      )}
-
-      <div style={{background:`linear-gradient(135deg,#0078FF 0%,#0055cc 55%,#003fa6 100%)`,
-        backgroundSize:"200% 200%",animation:"gradMove 8s ease infinite",
-        borderRadius:24,padding:"26px 26px 22px",marginBottom:20,position:"relative",
-        overflow:"hidden",boxShadow:"0 20px 56px rgba(0,80,200,.26)"}}>
-        <div style={{position:"absolute",right:-40,top:-40,width:200,height:200,borderRadius:"50%",
-          background:"rgba(255,255,255,.05)",pointerEvents:"none"}}/>
-
-        <div style={{position:"relative"}}>
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:10}}>
-            <div>
-              <div style={{color:"rgba(255,255,255,.65)",fontSize:12,fontWeight:600,marginBottom:8,
-                display:"flex",alignItems:"center",gap:5}}>
-                <svg width="11"height="11"viewBox="0 0 24 24"fill="none"stroke="rgba(255,255,255,.65)"strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12"cy="7"r="4"/></svg>
-                {user.upi}
-              </div>
-              <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:6}}>
-                <div className="balance-amt" style={{color:"#fff",fontSize:40,fontWeight:800,letterSpacing:"-1.5px",lineHeight:1}}>
-                  {vis?`₹${balance.toLocaleString("en-IN")}`:"₹ ●●●●●●"}
-                </div>
-                <button onClick={handleEyeClick}
-                  style={{background:"rgba(255,255,255,.15)",border:"none",borderRadius:9,
-                    padding:"7px 9px",cursor:"pointer",display:"flex",alignItems:"center"}}>
-                  {vis?Ic.eyeOff("#fff"):Ic.eye("#fff")}
-                </button>
-              </div>
-              <div style={{color:"rgba(255,255,255,.6)",fontSize:13,display:"flex",alignItems:"center",gap:5}}>
-                Available Balance
-              </div>
-            </div>
-            <div style={{background:"rgba(255,255,255,.14)",borderRadius:12,padding:"8px 14px",
-              display:"inline-flex",alignItems:"center",gap:6,backdropFilter:"blur(8px)"}}>
-              {Ic.shield("#fff")}
-              <span style={{color:"#fff",fontSize:12,fontWeight:700}}>Secured</span>
-            </div>
-          </div>
-
-          <div style={{display:"flex",gap:10,marginTop:22,flexWrap:"wrap"}}>
-            {[
-              {label:"Send",     ico:Ic.up("#0078FF"),      fn:()=>setPage("send")},
-              {label:"Request",  ico:Ic.rupee("#7c3aed"),   fn:()=>setPage("request-money")},
-              {label:"Pay Req",  ico:Ic.down("#22c55e"),    fn:()=>setPage("requests")},
-              {label:"Finance",  ico:Ic.bar("#0078FF"),     fn:()=>setPage("finance")},
-            ].map(b=>(
-              <button key={b.label} onClick={b.fn}
-                style={{flex:1,minWidth:60,padding:"12px 6px",background:"#fff",border:"none",borderRadius:16,
-                  color:"#0f172a",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",
-                  gap:7,fontFamily:"'DM Sans',sans-serif",boxShadow:"0 4px 14px rgba(0,0,0,.12)"}}>
-                <div style={{width:34,height:34,borderRadius:10,background:"#e8f1ff",
-                  display:"flex",alignItems:"center",justifyContent:"center"}}>{b.ico}</div>
-                <span style={{fontSize:12,fontWeight:700,color:"#374151"}}>{b.label}</span>
-              </button>
-            ))}
-          </div>
+        <div style={{display:"flex",alignItems:"center",gap:6,background:"rgba(255,255,255,.12)",
+          border:"1px solid rgba(255,255,255,.2)",borderRadius:8,padding:"6px 12px"}}>
+          {Ic.shield("#fff")}
+          <span style={{color:"#fff",fontSize:12,fontWeight:600}}>Secured</span>
         </div>
       </div>
 
-      <div className="stats-3" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14,marginBottom:20}}>
+      {/* ── Quick Actions ── */}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8,marginBottom:16}}>
         {[
-          {label:"Total Spent",    value:`₹${debits.toLocaleString("en-IN")}`,color:"#0078FF", bg:"#e8f1ff", ico:Ic.rupee("#0078FF")},
-          {label:"Threats Blocked",value:String(blocked),                     color:"#dc2626", bg:"#fef2f2", ico:Ic.shield("#dc2626")},
-          {label:"Transactions",   value:String(txs.length),                  color:"#7c3aed", bg:"#f5f3ff", ico:Ic.clock("#7c3aed")},
-        ].map((s,i)=>(
-          <Card key={s.label} hover style={{padding:"18px 18px"}}>
-            <div style={{width:38,height:38,borderRadius:11,background:s.bg,
-              display:"flex",alignItems:"center",justifyContent:"center",marginBottom:12}}>{s.ico}</div>
-            <div style={{fontSize:24,fontWeight:800,color:s.color}}>{s.value}</div>
-            <div style={{fontSize:12,color:"#94a3b8",fontWeight:500,marginTop:3}}>{s.label}</div>
-          </Card>
+          {label:"Send",    ico:Ic.up("#1A56DB"),    fn:()=>setPage("send")},
+          {label:"Request", ico:Ic.rupee("#7c3aed"), fn:()=>setPage("request-money")},
+          {label:"Pay Req", ico:Ic.down("#16a34a"),  fn:()=>setPage("requests")},
+          {label:"History", ico:Ic.clock("#16a34a"), fn:()=>setPage("history")},
+        ].map(b=>(
+          <button key={b.label} onClick={b.fn}
+            style={{padding:"14px 8px",background:"#fff",border:"1px solid #e5e7eb",borderRadius:12,
+              cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",
+              gap:8,fontFamily:"'Inter',sans-serif",transition:"border-color .15s"}}>
+            <div style={{width:36,height:36,borderRadius:10,background:"#eff6ff",
+              display:"flex",alignItems:"center",justifyContent:"center"}}>{b.ico}</div>
+            <span style={{fontSize:12,fontWeight:600,color:"#374151"}}>{b.label}</span>
+          </button>
         ))}
       </div>
 
-      <ServicesGrid setPage={setPage}/>
+      {/* ── Two-column layout: Services + Stats ── */}
+      <div className="two-col" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
 
-      <Card>
-        <div style={{padding:"16px 20px",display:"flex",justifyContent:"space-between",alignItems:"center",
-          borderBottom:"1px solid #f0f6ff"}}>
-          <div style={{fontWeight:800,color:"#0f172a",fontSize:16}}>Recent Transactions</div>
-          <button onClick={()=>setPage("history")}
-            style={{background:"none",border:"none",color:"#0078FF",cursor:"pointer",fontSize:13,
-              fontWeight:700,fontFamily:"'DM Sans',sans-serif"}}>View all →</button>
-        </div>
-        <div style={{padding:"0 20px"}}>
-          {txs.length===0&&(
-            <div style={{padding:"36px 0",textAlign:"center",color:"#94a3b8",fontSize:14}}>
-              No transactions yet.
+        {/* Services */}
+        <ServicesGrid setPage={setPage}/>
+
+        {/* Stats */}
+        <div style={{background:"#fff",border:"1px solid #e5e7eb",borderRadius:12,padding:20}}>
+          <div style={{fontWeight:700,color:"#111827",fontSize:14,marginBottom:16}}>Stats</div>
+          <div style={{display:"flex",flexDirection:"column",gap:14}}>
+            <div>
+              <div style={{fontSize:13,color:"#6b7280",marginBottom:4}}>Total Spent</div>
+              <div style={{fontWeight:700,fontSize:20,color:"#111827"}}>₹27,300</div>
             </div>
-          )}
-          {txs.slice(0,5).map((tx,i)=>(
-            <div key={tx.id} style={{display:"flex",alignItems:"center",gap:14,padding:"14px 0",
-              borderBottom:i<Math.min(txs.length,5)-1?"1px solid #f8faff":"none"}}>
-              <div style={{position:"relative"}}>
-                <Avatar name={tx.to||tx.from||"?"} size={42}/>
-                <div style={{position:"absolute",bottom:-1,right:-1,width:18,height:18,borderRadius:"50%",
-                  background:tx.type==="credit"?"#dcfce7":"#fef2f2",
-                  display:"flex",alignItems:"center",justifyContent:"center",border:"2.5px solid #fff"}}>
-                  {tx.type==="credit"?Ic.down("#166534"):Ic.up("#dc2626")}
-                </div>
-              </div>
-              <div style={{flex:1,minWidth:0}}>
-                <div style={{fontWeight:700,fontSize:14,color:"#0f172a",
-                  overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{tx.to||tx.from}</div>
-                <div style={{fontSize:12,color:"#94a3b8",marginTop:2}}>{tx.date} · {tx.note}</div>
-                {/* Network report badge in dashboard */}
-                {(tx.toNum||tx.fromNum) && getRecipientRisk(tx.toNum||tx.fromNum||"") >= 1 && (
-                  <span style={{fontSize:10,fontWeight:700,color:"#dc2626",background:"#fef2f2",
-                    border:"1px solid #fecaca",borderRadius:8,padding:"1px 6px",
-                    display:"inline-block",marginTop:2}}>
-                    ⚠ Reported {getRecipientRisk(tx.toNum||tx.fromNum||"")}×
-                  </span>
-                )}
-              </div>
-              <div style={{textAlign:"right"}}>
-                <div style={{fontWeight:800,fontSize:14,marginBottom:4,
-                  color:tx.type==="credit"?"#166534":tx.status==="blocked"?"#dc2626":"#0f172a"}}>
-                  {tx.type==="credit"?"+":"-"}₹{tx.amt.toLocaleString("en-IN")}
-                </div>
-                <RiskPill score={tx.risk}/>
-              </div>
+            <div style={{borderTop:"1px solid #f3f4f6",paddingTop:14}}>
+              <div style={{fontSize:13,color:"#6b7280",marginBottom:4}}>Protected Transactions</div>
+              <div style={{fontWeight:700,fontSize:20,color:"#dc2626"}}>1</div>
             </div>
-          ))}
+            <div style={{borderTop:"1px solid #f3f4f6",paddingTop:14}}>
+              <div style={{fontSize:13,color:"#6b7280",marginBottom:4}}>Transactions</div>
+              <div style={{fontWeight:700,fontSize:20,color:"#111827"}}>17</div>
+            </div>
+          </div>
         </div>
-      </Card>
+
+      </div>
     </div>
   );
 }
@@ -5613,7 +5539,7 @@ function HistoryPage({txs, user, tickets, createTicket}){
   });
 
   return(
-    <div className="page-pad page-enter" style={{padding:24,maxWidth:960,margin:"0 auto"}}>
+    <div className="page-pad page-enter" style={{padding:"24px 24px",maxWidth:"1400px",margin:"0 auto"}}>
       {toast && <div className="pt-toast">{toast}</div>}
       {reportIssueTx && (
         <ReportIssueModal
@@ -5648,7 +5574,7 @@ function HistoryPage({txs, user, tickets, createTicket}){
           <table style={{width:"100%",borderCollapse:"collapse"}}>
             <thead>
               <tr style={{background:"#f8faff"}}>
-                {["Date","Recipient / Sender","Amount","Note","Location","Risk","OTP","Status","Signals / Actions"].map(h => (
+                {["Date","Recipient / Sender","Amount","Note","Location","OTP","Status","Actions"].map(h => (
                   <th key={h} style={{padding:"13px 16px",color:"#94a3b8",fontSize:11,fontWeight:800,
                     textAlign:"left",whiteSpace:"nowrap",borderBottom:"1px solid #f0f6ff"}}>
                     {h}
@@ -5658,7 +5584,7 @@ function HistoryPage({txs, user, tickets, createTicket}){
             </thead>
             <tbody>
               {filtered.length===0 && (
-                <tr><td colSpan={9} style={{padding:"40px",textAlign:"center",color:"#94a3b8"}}>No transactions found.</td></tr>
+                <tr><td colSpan={8} style={{padding:"40px",textAlign:"center",color:"#94a3b8"}}>No transactions found.</td></tr>
               )}
               {filtered.map((tx,i) => {
                 const m = riskMeta(tx.risk);
@@ -5705,7 +5631,6 @@ function HistoryPage({txs, user, tickets, createTicket}){
                         <span style={{color:"#cbd5e1"}}>—</span>
                       )}
                     </td>
-                    <td style={{padding:"13px 16px"}}><RiskPill score={tx.risk}/></td>
                     <td style={{padding:"13px 16px"}}>
                       {tx.otp_used ? (
                         <span style={{color:"#0078FF",fontWeight:700}}>✓ OTP</span>
@@ -5723,21 +5648,20 @@ function HistoryPage({txs, user, tickets, createTicket}){
                       </span>
                     </td>
                     <td style={{padding:"13px 16px"}}>
-                      <RiskExplainer tx={tx} user={user}/>
-                      {tx.type==="debit"&&<div style={{marginTop:5}}><ReportRecipientBtn tx={tx} user={user}/></div>}
                       {tx.type==="debit" && (
-                        <div style={{marginTop:5}}>
+                        <div style={{display:"flex",flexDirection:"column",gap:6}}>
+                          <ReportRecipientBtn tx={tx} user={user}/>
                           {hasTicket ? (
-                            <span style={{fontSize:11,color:"#7c3aed",fontWeight:700,background:"#f5f3ff",
-                              border:"1px solid #c4b5fd",borderRadius:8,padding:"3px 10px",display:"inline-block"}}>
-                              🚨 Dispute Filed
+                            <span style={{fontSize:11,color:"#166534",fontWeight:700,background:"#dcfce7",
+                              border:"1px solid #86efac",borderRadius:8,padding:"4px 10px",display:"inline-block"}}>
+                              ✓ Dispute Filed
                             </span>
                           ) : (
                             <button onClick={() => setReportIssueTx(tx)}
-                              style={{fontSize:11,color:"#7c3aed",background:"#f5f3ff",border:"1px solid #c4b5fd",
-                                borderRadius:8,padding:"3px 10px",cursor:"pointer",fontWeight:700,
+                              style={{fontSize:11,color:"#15803d",background:"#dcfce7",border:"1px solid #86efac",
+                                borderRadius:8,padding:"4px 10px",cursor:"pointer",fontWeight:700,
                                 fontFamily:"'DM Sans',sans-serif",display:"inline-flex",alignItems:"center",gap:4}}>
-                              🚨 Auto Report Fraud
+                              Request Refund
                             </button>
                           )}
                         </div>
@@ -6695,7 +6619,7 @@ function ProfilePage({user,txs,balance,updateUser,tickets}){
                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
                     <div style={{display:"flex",alignItems:"center",gap:8}}>
                       <span style={{fontSize:13,fontWeight:800,color:"#0f172a"}}>{ticket.id}</span>
-                      <span style={{background:svm.bg,border:`1px solid ${svm.border}`,color:svm.color,fontSize:10,fontWeight:800,padding:"2px 8px",borderRadius:8}}>{svm.emoji} {sev}</span>
+                      <span style={{background:svm.bg,border:`1px solid ${svm.border}`,color:svm.color,fontSize:10,fontWeight:800,padding:"2px 8px",borderRadius:8}}>Under Review</span>
                     </div>
                     <span style={{padding:"3px 10px",borderRadius:20,fontSize:11,fontWeight:700,
                       background:sm.bg,color:sm.color,border:`1px solid ${sm.border}`}}>
@@ -6716,7 +6640,7 @@ function ProfilePage({user,txs,balance,updateUser,tickets}){
                   <div style={{fontSize:11,color:svm.color,background:svm.bg,border:`1px solid ${svm.border}`,
                     borderRadius:8,padding:"3px 8px",display:"inline-flex",alignItems:"center",gap:4,
                     fontWeight:600}}>
-                    {sev === "HIGH" ? "⚡ Immediate Action — Fast-track (0–24 hrs)" : `⏱️ Expected: ${svm.resolution}`}
+                    Under Review — Expected: {svm.resolution}
                   </div>
                   {ticket.refund_status !== "Pending" && (
                     <div style={{marginTop:8,fontSize:12,fontWeight:700,
@@ -6726,7 +6650,7 @@ function ProfilePage({user,txs,balance,updateUser,tickets}){
                   )}
                   <div style={{marginTop:6,fontSize:11,color:"#94a3b8",display:"flex",alignItems:"center",gap:5}}>
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    {new Date(ticket.created_at).toLocaleDateString()} · {sev === "HIGH" ? "Fast-track priority" : `ETA: ${svm.resolution}`}
+                    {new Date(ticket.created_at).toLocaleDateString()} · ETA: {svm.resolution}
                   </div>
                 </button>
               );
@@ -7279,22 +7203,24 @@ function RedeemRewards({coins, onClose}) {
 // ===== FEATURE 5: SERVICES GRID =====
 function ServicesGrid({setPage}){
   const{showToast,ToastEl}=useToast();
-  const svcs=[
+  const primary=[
     {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#0078FF"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12"cy="13"r="4"/></svg>,label:"Scan & Pay",color:"#0078FF"},
     {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#7c3aed"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16"y1="13"x2="8"y2="13"/><line x1="16"y1="17"x2="8"y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,label:"Pay Bills",color:"#7c3aed"},
-    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#f59e0b"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,label:"Electricity",color:"#f59e0b"},
     {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#22c55e"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><rect x="5"y="2"width="14"height="20"rx="2"ry="2"/><line x1="12"y1="18"x2="12.01"y2="18"/></svg>,label:"Recharge",color:"#22c55e"},
+    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#f59e0b"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,label:"Electricity",color:"#f59e0b"},
+    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#06b6d4"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z"/><path d="M12 8v4l3 3"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>,label:"Water Bill",color:"#06b6d4"},
     {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#0ea5e9"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M1 6l5.5 5.5L12 6l5.5 5.5L23 6"/><path d="M1 12l5.5 5.5L12 12l5.5 5.5L23 12"/></svg>,label:"DTH",color:"#0ea5e9"},
-    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#ec4899"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><rect x="2"y="7"width="20"height="15"rx="2"ry="2"/><polyline points="17 2 12 7 7 2"/></svg>,label:"Movies",color:"#ec4899"},
+    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#0078FF"strokeWidth="2"strokeLinecap="round" strokeLinejoin="round"><line x1="12"y1="20"x2="12"y2="10"/><line x1="18"y1="20"x2="18"y2="4"/><line x1="6"y1="20"x2="6"y2="16"/></svg>,label:"Invest",color:"#0078FF"},
+    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#6366f1"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,label:"Insurance",color:"#6366f1"},
+  ];
+  const secondary=[
     {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#f97316"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M3 17l2-8h14l2 8H3z"/><path d="M8 17v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2"/><circle cx="7"cy="9"r="1"/><circle cx="17"cy="9"r="1"/></svg>,label:"Train",color:"#f97316"},
     {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#10b981"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2"y="7"width="20"height="5"/><line x1="12"y1="22"x2="12"y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>,label:"Gift Cards",color:"#10b981"},
-    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#6366f1"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,label:"Insurance",color:"#6366f1"},
-    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#06b6d4"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z"/><path d="M12 8v4l3 3"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>,label:"Water Bill",color:"#06b6d4"},
-    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#0078FF"strokeWidth="2"strokeLinecap="round" strokeLinejoin="round"><line x1="12"y1="20"x2="12"y2="10"/><line x1="18"y1="20"x2="18"y2="4"/><line x1="6"y1="20"x2="6"y2="16"/></svg>,label:"Invest",color:"#0078FF"},
-    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#f43f5e"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>,label:"Food Vouchers",color:"#f43f5e"},
-    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#8b5cf6"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,label:"Learn & Play",color:"#8b5cf6",action:"smartguard"},
+    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#8b5cf6"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,label:"Learn and Earn",color:"#8b5cf6",action:"smartguard"},
     {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#f59e0b"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,label:"Redeem",color:"#f59e0b",action:"redeem"},
+    {icon:<svg width="22"height="22"viewBox="0 0 24 24"fill="none"stroke="#0f172a"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"><circle cx="12"cy="12"r="10"/><path d="M12 16v-4M12 8h.01"/></svg>,label:"RBI Guidelines",color:"#0f172a",action:"rbi"},
   ];
+  const [showMore,setShowMore]=React.useState(false);
   const handleClick=(s)=>{
     if(s.action){
       setPage(s.action);
@@ -7303,17 +7229,18 @@ function ServicesGrid({setPage}){
     }
   };
   return(
-    <Card style={{padding:22,marginBottom:20}}>
+    <div style={{background:"#fff",border:"1px solid #e5e7eb",borderRadius:12,padding:20,marginBottom:0}}>
       {ToastEl}
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16}}>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14}}>
         <div>
-          <div style={{fontWeight:800,fontSize:15,color:"#0f172a"}}>Explore Services</div>
-          <div style={{fontSize:12,color:"#94a3b8",marginTop:2}}>Coming soon — tap to preview</div>
+          <div style={{fontWeight:700,fontSize:14,color:"#111827"}}>Explore Services</div>
+          <div style={{fontSize:12,color:"#9ca3af",marginTop:2,lineHeight:1.5}}>Tap to preview</div>
         </div>
-        <span style={{fontSize:10,fontWeight:700,color:"#0078FF",background:"#e8f1ff",padding:"4px 10px",borderRadius:12}}>14 Services</span>
+        <button onClick={()=>setShowMore(!showMore)} style={{background:"none",border:"none",color:"#1A56DB",cursor:"pointer",fontSize:13,fontWeight:600,fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:4}}>
+          {showMore?"← Back":"View All →"}</button>
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10}}>
-        {svcs.map(s=>(
+      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8}}>
+        {primary.map(s=>(
           <button key={s.label} className="svc-card"
             onClick={()=>handleClick(s)}>
             <div style={{width:44,height:44,borderRadius:14,display:"flex",alignItems:"center",
@@ -7327,7 +7254,24 @@ function ServicesGrid({setPage}){
           </button>
         ))}
       </div>
-    </Card>
+      {showMore&&(
+        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8,marginTop:8}}>
+          {secondary.map(s=>(
+            <button key={s.label} className="svc-card"
+              onClick={()=>handleClick(s)}>
+              <div style={{width:44,height:44,borderRadius:14,display:"flex",alignItems:"center",
+                justifyContent:"center",
+                background:`${s.color}18`,border:`1.5px solid ${s.color}30`}}>
+                {s.icon}
+              </div>
+              <span style={{fontSize:11,fontWeight:700,color:"#374151",textAlign:"center",lineHeight:1.3}}>
+                {s.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -7760,9 +7704,9 @@ function getFraudSeverity(reason) {
   return "MEDIUM";
 }
 function getSeverityMeta(severity) {
-  if (severity === "HIGH") return { color: "#dc2626", bg: "#fef2f2", border: "#fca5a5", emoji: "🔴", label: "HIGH PRIORITY", badge: "#450a0a", resolution: "0–24 Hours", sublabel: "Fast-track Investigation" };
-  if (severity === "MEDIUM") return { color: "#d97706", bg: "#fffbeb", border: "#fcd34d", emoji: "🟡", label: "MEDIUM PRIORITY", badge: "#78350f", resolution: "2–5 Days", sublabel: "Standard Review" };
-  return { color: "#16a34a", bg: "#f0fdf4", border: "#86efac", emoji: "🟢", label: "LOW PRIORITY", badge: "#14532d", resolution: "1–3 Days", sublabel: "Processing" };
+  if (severity === "HIGH") return { color: "#dc2626", bg: "#fef2f2", border: "#fca5a5", emoji: "🔴", label: "Under Review", badge: "#450a0a", resolution: "0–24 Hours", sublabel: "Investigation Underway" };
+  if (severity === "MEDIUM") return { color: "#d97706", bg: "#fffbeb", border: "#fcd34d", emoji: "🟡", label: "Under Review", badge: "#78350f", resolution: "2–5 Days", sublabel: "Standard Review" };
+  return { color: "#16a34a", bg: "#f0fdf4", border: "#86efac", emoji: "🟢", label: "Under Review", badge: "#14532d", resolution: "1–3 Days", sublabel: "Processing" };
 }
 function generateRefId() {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -7871,36 +7815,14 @@ function FraudReportSuccessModal({ ticket, tx, onClose }) {
               <div style={{ fontSize: 20, fontWeight: 900, color: "#064e3b", letterSpacing: 1, fontFamily: "monospace" }}>{ticket.id}</div>
               <div style={{ fontSize: 11, color: "#047857", marginTop: 4 }}>CFCFRMS — Cyber Fraud Coordination Centre</div>
             </div>
-            {/* Severity Badge */}
-            <div style={{ background: sm.bg, border: `1.5px solid ${sm.border}`, borderRadius: 14, padding: "12px 16px", marginBottom: 16, display: "flex", alignItems: "center", gap: 12 }}>
-              <span style={{ fontSize: 22 }}>{sm.emoji}</span>
-              <div>
-                <div style={{ fontWeight: 800, fontSize: 14, color: sm.color }}>{sm.label} CASE</div>
-                <div style={{ fontSize: 11, color: sm.color, opacity: 0.8, marginTop: 2 }}>{sm.sublabel} — Expected: {sm.resolution}</div>
-              </div>
-              {sev === "HIGH" && <div style={{ marginLeft: "auto", background: "#fef2f2", border: "1px solid #fca5a5", borderRadius: 8, padding: "4px 10px", fontSize: 10, fontWeight: 800, color: "#dc2626" }}>⚡ FAST-TRACK</div>}
-            </div>
-            {/* Status Grid */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 16 }}>
-              {[
-                { label: "Bank Notified", status: "✔ Sent", color: "#16a34a", bg: "#f0fdf4" },
-                { label: "Cyber Cell", status: "✔ Sent", color: "#16a34a", bg: "#f0fdf4" },
-                { label: "Under Review", status: "⏳ Active", color: "#d97706", bg: "#fffbeb" },
-              ].map(s => (
-                <div key={s.label} style={{ background: s.bg, border: "1px solid", borderColor: `${s.color}44`, borderRadius: 12, padding: "10px 8px", textAlign: "center" }}>
-                  <div style={{ fontSize: 16, marginBottom: 4 }}>{s.status.includes("✔") ? "✔" : "⏳"}</div>
-                  <div style={{ fontSize: 10, fontWeight: 800, color: s.color, textTransform: "uppercase" }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
-            {/* Immediate Actions */}
+            {/* Actions Initiated */}
             <div style={{ background: "#eff6ff", border: "1.5px solid #93c5fd", borderRadius: 14, padding: "14px 16px", marginBottom: 16 }}>
-              <div style={{ fontWeight: 800, fontSize: 13, color: "#1e40af", marginBottom: 10 }}>⚡ Immediate Actions Initiated</div>
+              <div style={{ fontWeight: 800, fontSize: 13, color: "#1e40af", marginBottom: 10 }}>Actions Initiated</div>
               {[
                 "Beneficiary account flagged for review",
                 "Fund freeze request triggered",
                 "Transaction marked suspicious",
-                "Investigation assigned to priority queue",
+                "Investigation in progress",
               ].map((a, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                   <div style={{ width: 18, height: 18, borderRadius: "50%", background: "#dbeafe", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, color: "#1d4ed8", fontWeight: 800 }}>{i + 1}</div>
@@ -7930,7 +7852,7 @@ function FraudReportSuccessModal({ ticket, tx, onClose }) {
                 { step: "✔ Submitted", done: true, time: new Date(ticket.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) },
                 { step: "✔ Sent to Bank", done: true, time: new Date(ticket.created_at + 5000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) },
                 { step: "✔ Sent to Cyber Cell", done: true, time: new Date(ticket.created_at + 10000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) },
-                { step: "⏳ Fund Freeze Attempt", done: sev === "HIGH", time: "Pending..." },
+                { step: "⏳ Fund Freeze Attempt", done: false, time: "Pending..." },
                 { step: "⏳ Investigation Ongoing", done: false, time: "In progress" },
                 { step: "⏳ Resolution Pending", done: false, time: `ETA: ${sm.resolution}` },
               ].map((t, i) => (
@@ -8071,17 +7993,6 @@ function ReportIssueModal({tx, user, onClose, onSubmit}){
                 </div>
               ))}
             </div>
-
-            {/* Severity Preview */}
-            {sm && (
-              <div style={{background:sm.bg,border:`1.5px solid ${sm.border}`,borderRadius:12,padding:"10px 14px",marginBottom:16,display:"flex",alignItems:"center",gap:10}}>
-                <span style={{fontSize:18}}>{sm.emoji}</span>
-                <div>
-                  <div style={{fontSize:12,fontWeight:800,color:sm.color}}>{sm.label} — {sm.resolution}</div>
-                  <div style={{fontSize:11,color:sm.color,opacity:0.8}}>{sm.sublabel}</div>
-                </div>
-              </div>
-            )}
 
             {/* Transaction Summary */}
             <div style={{background:"#f8faff",borderRadius:14,padding:"14px 16px",marginBottom:18,
@@ -8236,8 +8147,17 @@ function TicketDetailModal({ticket, onClose, tx}){
               </div>
               <div style={{flex:1,padding:"10px 12px",background:svm.bg,borderRadius:12,
                 border:`1px solid ${svm.border}`,textAlign:"center"}}>
-                <div style={{fontSize:10,color:"#94a3b8",fontWeight:700,marginBottom:3}}>Priority</div>
-                <div style={{fontWeight:800,fontSize:12,color:svm.color}}>{svm.emoji} {sev}</div>
+                <div style={{fontSize:10,color:"#94a3b8",fontWeight:700,marginBottom:3}}>Status</div>
+                <div style={{fontWeight:800,fontSize:12,color:svm.color,display:"flex",
+                  alignItems:"center",justifyContent:"center",gap:4}}>
+                  <svg width="6" height="6"><circle cx="3" cy="3" r="3" fill={sm.dot}/></svg>
+                  {ticket.status}
+                </div>
+              </div>
+              <div style={{flex:1,padding:"10px 12px",background:rm.bg,borderRadius:12,
+                border:"1px solid rgba(0,0,0,.06)",textAlign:"center"}}>
+                <div style={{fontSize:10,color:"#94a3b8",fontWeight:700,marginBottom:3}}>Refund</div>
+                <div style={{fontWeight:800,fontSize:12,color:rm.color}}>{rm.label}</div>
               </div>
             </div>
 
@@ -8252,13 +8172,13 @@ function TicketDetailModal({ticket, onClose, tx}){
               alignItems:"center",
               gap:10
             }}>
-              <span style={{fontSize:20,flexShrink:0}}>{sev === "HIGH" ? "⚡" : "⏱️"}</span>
+              <span style={{fontSize:20,flexShrink:0}}>⏱️</span>
               <div>
                 <div style={{fontSize:13,fontWeight:800,color:svm.color}}>
-                  {sev === "HIGH" ? "Immediate Action in Progress" : "Expected Resolution"}
+                  Under Review
                 </div>
                 <div style={{fontSize:12,color:svm.color,opacity:0.8,marginTop:2}}>
-                  {svm.resolution} {sev !== "HIGH" ? "— " + svm.sublabel : "— Fast-track Investigation"}
+                  {svm.resolution} — {svm.sublabel}
                 </div>
               </div>
             </div>
@@ -8646,7 +8566,6 @@ function App(){
   const [balance, setBalance] = useState(0);
   const [requests, setRequests] = useState(SEED_REQS);
   const [showAssistant, setShowAssistant] = useState(false);
-  const [showRBIGuideline, setShowRBIGuideline] = useState(true);
   const [tickets, setTickets] = useState([]);
   const [wsToast, setWsToast] = useState("");        // real-time credit toast
 
@@ -8845,11 +8764,9 @@ function App(){
   const pp = {user, txs, balance, setPage, addTx, updateBalance, requests, resolveRequest, updateUser, tickets, createTicket, updateTicketStatus};
 
   return (
-    <div style={{display:"flex",minHeight:"100vh",fontFamily:"'DM Sans',sans-serif",
-      backgroundImage:"url('loginbg.jpg')",backgroundSize:"cover",backgroundPosition:"center",
-      backgroundAttachment:"fixed",position:"relative"}}>
-      <div style={{position:"fixed",inset:0,background:"rgba(240,246,255,.93)",zIndex:0}}/>
-      <div style={{position:"relative",zIndex:1,display:"flex",width:"100%"}}>
+    <div style={{display:"flex",minHeight:"100vh",fontFamily:"'Inter',sans-serif",
+      background:"#f1f5f9",position:"relative"}}>
+      <div style={{display:"flex",width:"100%"}}>
         <Sidebar page={page} setPage={setPage} user={user}
           onLogout={handleLogout} pendingCount={pendingCount}/>
         <main id="main-content" style={{flex:1,overflowY:"auto",maxHeight:"100vh",position:"relative"}}>
@@ -8864,14 +8781,15 @@ function App(){
             {page === "profile"       && <ProfilePage {...pp}/>}
             {page === "smartguard"   && <SmartGuardPage {...pp}/>}
             {page === "redeem"        && <RedeemPage {...pp}/>}
+            {page === "rbi"           && <RBIGuidelinesPage {...pp}/>}
           </div>
 
           <button
             onClick={() => setShowAssistant(true)}
             style={{position:"fixed",bottom:28,right:28,zIndex:100,
-              width:60,height:60,borderRadius:"50%",background:`linear-gradient(135deg,#0078FF,#0055cc)`,
+              width:60,height:60,borderRadius:"50%",background:"#1A56DB",
               border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",
-              boxShadow:"0 6px 28px rgba(0,120,255,.45)"}}>
+              boxShadow:"0 4px 16px rgba(26,86,219,.35)"}}>
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
@@ -8881,7 +8799,6 @@ function App(){
       </div>
 
       {showAssistant && <SafePayAssistant user={user} txs={txs} onClose={() => setShowAssistant(false)}/>}
-      {showRBIGuideline && <RBIGuidelineModal onClose={() => setShowRBIGuideline(false)} />}
 
       {/* ── Real-time WebSocket toast (credit / fraud warning) ── */}
       {wsToast && (
@@ -8976,33 +8893,33 @@ function SmartGuardPage({setPage, user}) {
   return (
     <div className="page-pad page-enter" style={{ padding: 24, maxWidth: 500, margin: '0 auto', textAlign: 'center' }}>
       {showModal && canPlay && <SmartGuardGame onComplete={handleGameComplete} />}
-      <div style={{ width: 80, height: 80, borderRadius: 24, background: 'linear-gradient(135deg,#8b5cf6,#6d28d9)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', boxShadow: '0 12px 32px rgba(139,92,246,.35)' }}>
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div style={{ width: 64, height: 64, borderRadius: 16, background: '#8b5cf6', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', border: '1px solid #c4b5fd' }}>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
-      <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>Learn & Play</h2>
-      <p style={{ fontSize: 14, color: '#64748b', marginBottom: 24, lineHeight: 1.6 }}>Test your fraud detection skills and earn coins!</p>
-      <div style={{ background: '#f0f6ff', borderRadius: 16, padding: 20, marginBottom: 24 }}>
-        <div style={{ fontSize: 14, color: '#64748b', marginBottom: 6 }}>Your Coins</div>
-        <div style={{ fontSize: 36, fontWeight: 800, color: '#0078FF' }}>🪙 {coins}</div>
+      <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 4 }}>Learn & Play</h2>
+      <p style={{ fontSize: 14, color: '#64748b', marginBottom: 20, lineHeight: 1.6 }}>Test your fraud detection skills and earn coins!</p>
+      <div style={{ background: '#f8faff', borderRadius: 12, padding: 16, marginBottom: 16, border: '1px solid #dbeafe' }}>
+        <div style={{ fontSize: 12, color: '#64748b', marginBottom: 4 }}>Your Coins</div>
+        <div style={{ fontSize: 28, fontWeight: 800, color: '#0078FF' }}>🪙 {coins}</div>
       </div>
       {canPlay ? (
-        <div style={{ background: '#dcfce7', border: '1.5px solid #86efac', borderRadius: 16, padding: 20, marginBottom: 24 }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#166534', marginBottom: 4 }}>{isAdmin ? 'Admin Access — Unlimited Play!' : 'Ready to play!'}</div>
-          <div style={{ fontSize: 13, color: '#15803d', marginBottom: 16 }}>Answer 5 questions — earn 5 coins for each correct answer.</div>
-          <button id="playNowBtn" onClick={handlePlayNow} style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg,#8b5cf6,#6d28d9)', color: '#fff', border: 'none', borderRadius: 14, fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',sans-serif", boxShadow: '0 6px 20px rgba(139,92,246,.3)', marginBottom: 10 }}>
+        <div style={{ background: '#f8faff', borderRadius: 12, padding: 16, marginBottom: 16, border: '1px solid #dbeafe' }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#1e40af', marginBottom: 4 }}>{isAdmin ? 'Admin Access — Unlimited Play!' : 'Ready to play!'}</div>
+          <div style={{ fontSize: 13, color: '#64748b', marginBottom: 14 }}>Answer 5 questions — earn 5 coins for each correct answer.</div>
+          <button id="playNowBtn" onClick={handlePlayNow} style={{ width: '100%', padding: '12px', background: '#0078FF', color: '#fff', border: 'none', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',sans-serif", marginBottom: 8 }}>
             Play Now
           </button>
-          <button onClick={handlePlayLater} style={{ width: '100%', padding: '14px', background: '#f0f6ff', color: '#0078FF', border: '1.5px solid #dbeafe', borderRadius: 14, fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',sans-serif" }}>
+          <button onClick={handlePlayLater} style={{ width: '100%', padding: '12px', background: '#fff', color: '#0078FF', border: '1.5px solid #dbeafe', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',sans-serif" }}>
             Play Later
           </button>
         </div>
       ) : (
-        <div style={{ background: '#fef3c7', border: '1.5px solid #fcd34d', borderRadius: 16, padding: 20, marginBottom: 24 }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#92400e', marginBottom: 4 }}>You already played today.</div>
+        <div style={{ background: '#fef3c7', borderRadius: 12, padding: 16, marginBottom: 16, border: '1px solid #fcd34d' }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#92400e', marginBottom: 4 }}>You already played today.</div>
           <div style={{ fontSize: 13, color: '#b45309' }}>Come back tomorrow for another round!</div>
         </div>
       )}
-      <button onClick={() => setPage('dashboard')} style={{ padding: '12px 28px', background: '#0078FF', color: '#fff', border: 'none', borderRadius: 12, fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',sans-serif" }}>
+      <button onClick={() => setPage('dashboard')} style={{ padding: '11px 24px', background: '#0078FF', color: '#fff', border: 'none', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',sans-serif" }}>
         ← Back to Dashboard
       </button>
     </div>
@@ -9036,26 +8953,26 @@ function RedeemPage({setPage}) {
   return (
     <div className="page-pad page-enter" style={{ padding: 24, maxWidth: 480, margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: 28 }}>
-        <div style={{ width: 64, height: 64, borderRadius: 20, background: 'linear-gradient(135deg,#f59e0b,#d97706)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px', boxShadow: '0 8px 24px rgba(245,158,11,.3)' }}>
-          <span style={{ fontSize: 32 }}>🎁</span>
+        <div style={{ width: 56, height: 56, borderRadius: 16, background: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px', border: '1px solid #fcd34d' }}>
+          <span style={{ fontSize: 28 }}>🎁</span>
         </div>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Redeem Rewards</h2>
         <p style={{ fontSize: 13, color: '#64748b' }}>Spend your hard-earned coins on exciting rewards!</p>
       </div>
-      <div style={{ background: '#f0f6ff', borderRadius: 16, padding: 18, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 14 }}>
-        <span style={{ fontSize: 36 }}>🪙</span>
+      <div style={{ background: '#f8faff', borderRadius: 12, padding: 16, marginBottom: 20, border: '1px solid #dbeafe', display: 'flex', alignItems: 'center', gap: 14 }}>
+        <span style={{ fontSize: 32 }}>🪙</span>
         <div>
           <div style={{ fontSize: 12, color: '#64748b', fontWeight: 600 }}>Your Coins</div>
-          <div style={{ fontSize: 28, fontWeight: 800, color: '#0078FF' }}>{coins}</div>
+          <div style={{ fontSize: 26, fontWeight: 800, color: '#0078FF' }}>{coins}</div>
         </div>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
         {rewards.map(r => (
-          <div key={r.cost + r.label} style={{ padding: '14px', background: coins >= r.cost ? '#f8faff' : '#fef2f2', border: `1.5px solid ${coins >= r.cost ? '#dbeafe' : '#fecaca'}`, borderRadius: 16, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, textAlign: 'center' }}>
-            <div style={{ width: 44, height: 44, borderRadius: 12, background: coins >= r.cost ? '#e8f1ff' : '#fee2e2', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>{r.icon}</div>
+          <div key={r.cost + r.label} style={{ padding: '14px', background: coins >= r.cost ? '#f8faff' : '#fef2f2', border: `1px solid ${coins >= r.cost ? '#dbeafe' : '#fecaca'}`, borderRadius: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, textAlign: 'center' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 10, background: coins >= r.cost ? '#e8f1ff' : '#fee2e2', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>{r.icon}</div>
             <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a', lineHeight: 1.2 }}>{r.label}</div>
             <div style={{ fontSize: 11, color: '#64748b', lineHeight: 1.3 }}>{r.desc}</div>
-            <button onClick={() => handleRedeem(r)} disabled={coins < r.cost} style={{ padding: '7px 12px', background: coins >= r.cost ? 'linear-gradient(135deg,#0078FF,#0055cc)' : '#94a3b8', color: '#fff', border: 'none', borderRadius: 10, fontSize: 12, fontWeight: 700, cursor: coins >= r.cost ? 'pointer' : 'not-allowed', fontFamily: "'DM Sans',sans-serif", whiteSpace: 'nowrap', marginTop: 4 }}>
+            <button onClick={() => handleRedeem(r)} disabled={coins < r.cost} style={{ padding: '7px 12px', background: coins >= r.cost ? '#0078FF' : '#94a3b8', color: '#fff', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: coins >= r.cost ? 'pointer' : 'not-allowed', fontFamily: "'DM Sans',sans-serif", whiteSpace: 'nowrap', marginTop: 4 }}>
               {r.cost} 🪙
             </button>
           </div>
@@ -9068,6 +8985,79 @@ function RedeemPage({setPage}) {
       )}
       <div style={{ textAlign: 'center', marginTop: 24 }}>
         <button onClick={() => setPage('dashboard')} style={{ padding: '12px 28px', background: '#0078FF', color: '#fff', border: 'none', borderRadius: 12, fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',sans-serif" }}>
+          ← Back to Dashboard
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ===== RBI GUIDELINES PAGE =====
+function RBIGuidelinesPage({setPage}) {
+  const guidelines = [
+    {
+      date: "April 1, 2026",
+      title: "Stronger Authentication Requirements",
+      desc: "Stronger authentication requirements introduced for digital payments beyond OTP-only verification."
+    },
+    {
+      date: "January 1, 2026",
+      title: "Inactive Account Closure",
+      desc: "Banks may close inactive or dormant accounts after extended inactivity to reduce fraud risk."
+    },
+    {
+      date: "January 1, 2026",
+      title: "Prepayment Charges Removed",
+      desc: "Prepayment charges removed on many floating-rate retail loans to improve transparency for borrowers."
+    },
+    {
+      date: "November 6, 2025",
+      title: "Nominee Information Disclosure",
+      desc: "Banks must inform customers about nominee options during account opening and related services."
+    },
+  ];
+
+  return (
+    <div className="page-pad page-enter" style={{padding:24,maxWidth:800,margin:"0 auto"}}>
+      <div style={{marginBottom:24}}>
+        <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
+          <div style={{width:48,height:48,borderRadius:"50%",background:"#0f172a",display:"flex",alignItems:"center",justifyContent:"center",border:"2px solid #FFD700"}}>
+            <span style={{fontSize:20,fontWeight:900,color:"#FFD700"}}>₹</span>
+          </div>
+          <div>
+            <h2 style={{fontSize:22,fontWeight:800,color:"#0f172a",marginBottom:2}}>Reserve Bank of India</h2>
+            <p style={{fontSize:13,color:"#64748b"}}>Latest Digital Payment Guidelines</p>
+          </div>
+        </div>
+      </div>
+
+      <div style={{display:"flex",flexDirection:"column",gap:16}}>
+        {guidelines.map((g,i) => (
+          <Card key={i} style={{padding:20,borderLeft:"4px solid #0f172a"}}>
+            <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+              <span style={{fontSize:11,fontWeight:800,color:"#FFD700",background:"#0f172a",padding:"4px 10px",borderRadius:8}}>
+                {g.date}
+              </span>
+            </div>
+            <div style={{fontSize:15,fontWeight:700,color:"#0f172a",marginBottom:6}}>{g.title}</div>
+            <div style={{fontSize:13,color:"#64748b",lineHeight:1.6}}>{g.desc}</div>
+          </Card>
+        ))}
+      </div>
+
+      <div style={{marginTop:24,background:"#f8faff",borderRadius:14,padding:16,border:"1px solid #dbeafe"}}>
+        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
+          <svg width="18"height="18"viewBox="0 0 24 24"fill="none"stroke="#0078FF"strokeWidth="2"><circle cx="12"cy="12"r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <span style={{fontSize:13,fontWeight:700,color:"#0078FF"}}>Stay Safe, Stay Vigilant</span>
+        </div>
+        <p style={{fontSize:12,color:"#64748b",margin:0}}>
+          Always verify recipient details before making payments. Never share OTP, PIN, or sensitive information with anyone.
+          Report suspicious activity immediately at cybercrime.gov.in or call 1930.
+        </p>
+      </div>
+
+      <div style={{textAlign:"center",marginTop:24}}>
+        <button onClick={()=>setPage("dashboard")} style={{padding:"12px 28px",background:"#0078FF",color:"#fff",border:"none",borderRadius:12,fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'DM Sans',sans-serif"}}>
           ← Back to Dashboard
         </button>
       </div>
